@@ -2,7 +2,7 @@
 <odoo noupdate="1">
     <record id="param_only_check_states" model="ir.config_parameter">
         <field name="key">priority_sale_order.only_check_states</field>
-        <field name="value">sale,done</field>
+        <field name="value">sale</field>
     </record>
     <record id="param_max_times_high_priority" model="ir.config_parameter">
         <field name="key">priority_sale_order.max_times_high_priority</field>

@@ -10,7 +10,7 @@ $(error ENGINE must be either podman or docker)
 endif
 
 .DEFAULT_GOAL := help
-.PHONY: help up down restart logs ps shell
+.PHONY: help up down restart logs ps shell store-html package-store
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z_-]+:.*## / {printf "%-10s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -32,3 +32,9 @@ ps: ## Show container status
 
 shell: ## Open a shell in the Odoo container
 	$(COMPOSE) -p $(PROJECT) exec odoo bash
+
+store-html: ## Build localized Odoo Apps description pages
+	python3 docs/store/build_html.py --store-listing --output-dir static/description
+
+package-store: store-html ## Build clean ZIP packages for Odoo 17, 18, 19, and 20
+	python3 tools/package_store.py

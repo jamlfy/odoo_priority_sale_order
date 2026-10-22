@@ -17,7 +17,7 @@ The priority is visible on sales orders, their related transfers, and transfer o
 - Mark each sales order as normal or high priority and show that value in order, quotation, and linked transfer lists.
 - Display the linked order's priority on its transfer operation lines and detailed operation lines.
 - Sort picking and delivery lists with high-priority transfers first, then by scheduled date.
-- Show priority on the sales order form and prevent changes when the order state is not enabled, the limit has been reached, or the order is done.
+- Show priority on the sales order form and prevent changes when the order state is not enabled or the configured limit has been reached.
 - Configure participating order states, the maximum number of high-priority orders, and the period day offset.
 
 ## Requirements
@@ -37,8 +37,8 @@ Configure the module under **Settings → Priority Sale Order**. All control par
 
 | Setting | Default | Purpose |
 |---|---:|---|
-| Included states | `sale`, `done` | Select one or more states defined by the `sale.order` model. |
+| Included states | `sale` | Select one or more states defined by the installed `sale.order` model. |
 | High-priority limit | `3` | Maximum number of high-priority orders in the period. |
 | Period day offset | `1.0` day | Day offset used to determine the period being checked. |
 
-Orders in the **Done** state are always locked. Orders whose states are not listed in `only_check_states` are also locked; with the default configuration, cancelled orders are excluded from the check.
+Only states defined by the installed Odoo version are offered. Orders whose states are not listed in `only_check_states` are locked; with the default configuration, cancelled orders are excluded from the check.

@@ -48,7 +48,10 @@ class TestPrioritySaleOrder(TransactionCase):
     def test_available_states_come_from_sale_order(self):
         states = self.env["sale.order"]._get_sale_order_states()
         self.assertIn("sale", states)
-        self.assertIn("done", states)
+        selection = self.env["sale.order"]._fields["state"].selection
+        if callable(selection):
+            selection = selection(self.env["sale.order"])
+        self.assertEqual(states, list(dict(selection)))
         self.assertEqual(len(states), len(set(states)))
 
     def test_priority_is_enabled_for_authorized_user_and_included_state(self):
@@ -64,6 +67,8 @@ class TestPrioritySaleOrder(TransactionCase):
         self.assertTrue(order.higher_disable_priority)
 
     def test_done_orders_are_always_disabled(self):
+        if "done" not in self.env["sale.order"]._get_sale_order_states():
+            self.skipTest("This Odoo version does not define a done sales order state.")
         self.env["ir.config_parameter"].sudo().set_param(
             "priority_sale_order.only_check_states", "sale,done"
         )

@@ -53,7 +53,7 @@ class ResConfigSettings(models.TransientModel):
         values = super().get_values()
         states = self._sync_priority_sale_order_states()
         raw_states = self.env["ir.config_parameter"].sudo().get_param(
-            "priority_sale_order.only_check_states", "sale,done"
+            "priority_sale_order.only_check_states", "sale"
         )
         selected_codes = {code.strip() for code in raw_states.split(",") if code.strip()}
         values["priority_sale_order_only_check_states"] = [

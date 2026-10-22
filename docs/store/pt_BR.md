@@ -37,8 +37,8 @@ Configure o módulo em **Configurações → Prioridade de pedidos de venda**. T
 
 | Configuração | Valor padrão | Finalidade |
 |---|---:|---|
-| Estados incluídos | `sale`, `done` | Selecione um ou mais estados definidos pelo modelo `sale.order`. |
+| Estados incluídos | `sale` | Selecione um ou mais estados definidos pelo modelo `sale.order` instalado. |
 | Limite de prioridade alta | `3` | Número máximo de pedidos de prioridade alta no período. |
 | Deslocamento do período | `1.0` dia | Deslocamento em dias usado para determinar o período verificado. |
 
-Pedidos no estado **Concluído** ficam sempre bloqueados. Pedidos cujos estados não estejam em `only_check_states` também ficam bloqueados; na configuração padrão, pedidos cancelados não participam da verificação.
+Somente estados definidos pela versão instalada do Odoo são oferecidos. Pedidos cujos estados não estejam em `only_check_states` ficam bloqueados; na configuração padrão, pedidos cancelados não participam da verificação.

@@ -33,27 +33,40 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
 
+      - name: Build package for the Odoo series under test
+        run: |
+          python3 tools/package_store.py \
+            --odoo-version '${{ matrix.odoo-version }}' \
+            --output-dir /tmp/odoo-app-package
+          mkdir -p /tmp/odoo-app/priority_sale_order /tmp/coverage-output
+          chmod 777 /tmp/coverage-output
+          unzip -q "/tmp/odoo-app-package/priority_sale_order-${{ matrix.odoo-version }}.zip" \
+            -d /tmp/odoo-app
+
       - name: Run Odoo addon tests with coverage
         env:
           ODOO_VERSION: ${{ matrix.odoo-version }}
         run: |
           docker run --rm --network host \
-            --volume "$GITHUB_WORKSPACE:/mnt/extra-addons/priority_sale_order" \
+            --volume "/tmp/odoo-app/priority_sale_order:/mnt/extra-addons/priority_sale_order" \
+            --volume "/tmp/coverage-output:/coverage-output" \
             --workdir /mnt/extra-addons/priority_sale_order \
             --entrypoint bash \
             --env ODOO_VERSION="$ODOO_VERSION" \
             odoo:"$ODOO_VERSION" -lc '
               set -e
               pip3 install coverage
-              coverage run --branch --source=. /usr/bin/odoo \
+              coverage run --data-file=/coverage-output/.coverage \
+                --branch --source=. /usr/bin/odoo \
                 --db_host=127.0.0.1 --db_port=5432 \
                 --db_user=odoo --db_password=odoo \
                 --database=priority_sale_order_test \
                 --init=priority_sale_order \
                 --test-enable --test-tags=/priority_sale_order \
-                --stop-after-init --without-demo=all
-              coverage report --show-missing
-              coverage xml -o coverage.xml
+                --stop-after-init --without-demo
+              coverage report --data-file=/coverage-output/.coverage --show-missing
+              coverage xml --data-file=/coverage-output/.coverage \
+                -o /coverage-output/coverage.xml
             '
 
       - name: Upload coverage report
@@ -61,5 +74,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-odoo-${{ matrix.odoo-version }}
-          path: coverage.xml
+          path: /tmp/coverage-output/coverage.xml
           if-no-files-found: ignore

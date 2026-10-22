@@ -36,3 +36,14 @@ python3 docs/store/build_html.py --language pt_BR --output-dir /tmp/priority-sal
 Use `--language en`, `--language es`, or `--language pt_BR`. If omitted, all languages are built. The default output directory is `docs/store/html/`.
 
 After editing any `*.md` source, run the builder again to refresh the HTML pages.
+
+## Build descriptions for Odoo Apps
+
+From the repository root, generate the localized, standalone descriptions in the addon's expected location:
+
+```bash
+python3 docs/store/build_html.py --store-listing --output-dir static/description
+```
+
+The English page is `static/description/index.html`; Spanish and Brazilian Portuguese are generated beside it.
+Create the store packages with `python3 tools/package_store.py` after adding the icon and screenshots.

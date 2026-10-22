@@ -37,8 +37,8 @@ Configura el módulo desde **Ajustes → Prioridad de pedidos de venta**. Todos 
 
 | Ajuste | Valor inicial | Uso |
 |---|---:|---|
-| Estados incluidos | `sale`, `done` | Selecciona uno o varios estados definidos por el modelo `sale.order`. |
+| Estados incluidos | `sale` | Selecciona uno o varios estados definidos por el modelo `sale.order` instalado. |
 | Máximo de prioridad alta | `3` | Máximo de pedidos de prioridad alta en el periodo. |
 | Desplazamiento del periodo | `1.0` día | Desplazamiento en días usado para determinar el periodo consultado. |
 
-Los pedidos en estado **Hecho** siempre quedan bloqueados. Los pedidos cuyos estados no estén incluidos en `only_check_states` también quedan bloqueados; con la configuración inicial, los pedidos cancelados no participan en el control.
+Solo se ofrecen estados definidos por la versión de Odoo instalada. Los pedidos cuyos estados no estén incluidos en `only_check_states` quedan bloqueados; con la configuración inicial, los pedidos cancelados no participan en el control.

@@ -39,7 +39,8 @@ class TestPrioritySaleOrderSettings(TransactionCase):
         state = self.env["priority.sale.order.state"].sudo().create(
             {"name": "Invalid state", "code": "not_a_sale_order_state"}
         )
+        settings = self.env["res.config.settings"].new(
+            {"priority_sale_order_only_check_states": [Command.set(state.ids)]}
+        )
         with self.assertRaises(ValidationError):
-            self.env["res.config.settings"].create(
-                {"priority_sale_order_only_check_states": [Command.set(state.ids)]}
-            )
+            settings._check_priority_sale_order_states()

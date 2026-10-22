@@ -1,2 +1,5 @@
 tmp
 .env
+dist/
+__pycache__/
+*.py[cod]

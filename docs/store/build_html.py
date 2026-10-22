@@ -109,7 +109,7 @@ footer { padding: 25px 20px; border-top: 1px solid var(--line); color: var(--mut
 """
 
 
-def render_page(language: str, output_dir: Path) -> str:
+def render_page(language: str, output_dir: Path, store_listing: bool = False) -> str:
     info = LANGUAGES[language]
     source_path = HERE / info["file"]
     parser = markdown.Markdown(extensions=["tables", "fenced_code", "toc", "sane_lists"])
@@ -117,7 +117,6 @@ def render_page(language: str, output_dir: Path) -> str:
     if source and source[0].startswith("# "):
         source = source[1:]
     body = parser.convert("\n".join(source))
-    source_link = "../" + info["file"]
     nav_items = []
     for code, entry in LANGUAGES.items():
         current = ' aria-current="page"' if code == language else ""
@@ -171,7 +170,7 @@ def render_page(language: str, output_dir: Path) -> str:
     <article class="article">{body}</article>
     <aside class="sidebar">
       <section class="side-card"><p class="side-label">{sidebar_label}</p><p class="accent">17 · 18 · 19 · 20</p><p>{sidebar_copy}</p></section>
-      <section class="side-card"><p class="side-label">Source</p><p><a href="{source_link}">Read the Markdown version</a></p></section>
+      {'' if store_listing else f'<section class="side-card"><p class="side-label">Source</p><p><a href="../{info["file"]}">Read the Markdown version</a></p></section>'}
     </aside>
   </main>
   <footer>{footer}</footer>
@@ -194,12 +193,20 @@ def main() -> None:
         default=DEFAULT_OUTPUT,
         help="Directory for generated HTML files.",
     )
+    arg_parser.add_argument(
+        "--store-listing",
+        action="store_true",
+        help="Omit links to Markdown sources for packaged Odoo Apps descriptions.",
+    )
     args = arg_parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     languages = LANGUAGES if args.language == "all" else [args.language]
     for language in languages:
         destination = args.output_dir / LANGUAGES[language]["output"]
-        destination.write_text(render_page(language, args.output_dir), encoding="utf-8")
+        destination.write_text(
+            render_page(language, args.output_dir, store_listing=args.store_listing),
+            encoding="utf-8",
+        )
         print(f"Generated {destination}")
 
 

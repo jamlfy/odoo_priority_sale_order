@@ -1,11 +1,17 @@
 {
     "name": "Priority Sale Order",
-    "version": "17.0.1.4.0",
+    "version": "19.0.1.4.0",
     "summary": "Prioritize sales orders and deliveries with configurable volume and time limits.",
     "description": "Created for stores that need to prioritize selected shipments and deliveries. Sales teams can choose how many sales orders may receive high priority during each configured time period.",
     "category": "Sales/Sales",
     "author": "Jam",
     "license": "LGPL-3",
+    "images": [
+        "static/description/main_screenshot.png",
+        "static/description/sale_order.png",
+        "static/description/picking.png",
+        "static/description/settings.png",
+    ],
     "depends": [
         "sale_stock",
     ],

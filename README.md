@@ -28,9 +28,19 @@ To use Docker instead:
 make up ENGINE=docker
 ```
 
-On the first startup, Compose creates the `priority_sale_order` database and installs Sales, Inventory, and **Priority Sale Order**. Open [http://localhost:8069](http://localhost:8069) once initialization completes. The database name and modules are configurable with `ODOO_DB` and `ODOO_INIT_MODULES` in `.env`; copy `.env.example` to `.env` to customize them. The addon is mounted into the Odoo container and PostgreSQL data persists in a named volume. Choose an Odoo version with `ODOO_VERSION=17.0 make up` (also supports `18.0`, `19.0`, and `20.0`). Use `make down` to stop the stack without deleting database data; `make logs` follows the container logs.
+On the first startup, Compose creates the `priority_sale_order` database and installs Sales, Inventory, and **Priority Sale Order**. Open [http://localhost:8069](http://localhost:8069) once initialization completes. The database name and modules are configurable with `ODOO_DB` and `ODOO_INIT_MODULES` in `.env`; copy `.env.example` to `.env` to customize them. The addon is mounted into the Odoo container and PostgreSQL data persists in a named volume. Compose defaults to Odoo 19 to match the source manifest; use the versioned ZIP packages for Odoo 17, 18, and 20. Use `make down` to stop the stack without deleting database data; `make logs` follows the container logs.
 
 If using Podman, install a Compose provider supported by `podman compose`.
+
+## Prepare Odoo Apps packages
+
+The repository can build clean, localized listing pages and separate upload ZIPs for Odoo 17, 18, 19, and 20. Place the final PNG screenshots in `static/description/` using the filenames declared in `__manifest__.py`, then run:
+
+```bash
+make package-store
+```
+
+The ZIP files are written to `dist/` and contain only the addon, with the manifest version prefix set for each Odoo series. Keep the store packages free of Compose and CI files.
 
 Store listing content is maintained in Markdown by language:
 
