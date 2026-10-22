@@ -34,7 +34,7 @@ shell: ## Open a shell in the Odoo container
 	$(COMPOSE) -p $(PROJECT) exec odoo bash
 
 store-html: ## Build localized Odoo Apps description pages
-	python3 docs/store/build_html.py --store-listing --output-dir static/description
+	python3 docs/store/build_html.py --store-listing --output-dir priority_sale_order/static/description
 
 package-store: store-html ## Build clean ZIP packages for Odoo 17, 18, 19, and 20
 	python3 tools/package_store.py

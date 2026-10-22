@@ -9,7 +9,14 @@ import tempfile
 import zipfile
 from pathlib import Path
 
-from addon_staging import MODULE_NAME, ODOO_VERSIONS, ROOT, package_version, stage_addon
+from addon_staging import (
+    MODULE_NAME,
+    ODOO_VERSIONS,
+    REPO_ROOT,
+    ROOT,
+    package_version,
+    stage_addon,
+)
 
 VERSIONS = ODOO_VERSIONS
 
@@ -56,7 +63,7 @@ def build_packages(output_dir: Path, versions: tuple[str, ...] = VERSIONS) -> li
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--output-dir", type=Path, default=ROOT / "dist", help="Directory for ZIP packages."
+        "--output-dir", type=Path, default=REPO_ROOT / "dist", help="Directory for ZIP packages."
     )
     parser.add_argument(
         "--odoo-version",

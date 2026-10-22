@@ -35,7 +35,7 @@ services:
       USER: ${POSTGRES_USER:-odoo}
       PASSWORD: ${POSTGRES_PASSWORD:-odoo}
     volumes:
-      - ./:/mnt/extra-addons/priority_sale_order:ro,z
+      - ./priority_sale_order:/mnt/extra-addons/priority_sale_order:ro,z
       - odoo-data:/var/lib/odoo
     restart: unless-stopped
 

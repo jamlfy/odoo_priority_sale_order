@@ -42,8 +42,8 @@ After editing any `*.md` source, run the builder again to refresh the HTML pages
 From the repository root, generate the localized, standalone descriptions in the addon's expected location:
 
 ```bash
-python3 docs/store/build_html.py --store-listing --output-dir static/description
+python3 docs/store/build_html.py --store-listing --output-dir priority_sale_order/static/description
 ```
 
-The English page is `static/description/index.html`; Spanish and Brazilian Portuguese are generated beside it.
+The English page is `priority_sale_order/static/description/index.html`; Spanish and Brazilian Portuguese are generated beside it.
 Create the store packages with `python3 tools/package_store.py` after adding the icon and screenshots.

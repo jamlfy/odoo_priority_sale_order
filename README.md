@@ -34,7 +34,7 @@ If using Podman, install a Compose provider supported by `podman compose`.
 
 ## Prepare Odoo Apps packages
 
-The repository can build clean, localized listing pages and separate upload ZIPs for Odoo 17, 18, 19, and 20. Place the final PNG screenshots in `static/description/` using the filenames declared in `__manifest__.py`, then run:
+The repository can build clean, localized listing pages and separate upload ZIPs for Odoo 17, 18, 19, and 20. Place the final PNG screenshots in `priority_sale_order/static/description/` using the filenames declared in `priority_sale_order/__manifest__.py`, then run:
 
 ```bash
 make package-store

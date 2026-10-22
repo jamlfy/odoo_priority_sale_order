@@ -8,8 +8,9 @@ import shutil
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[1]
 MODULE_NAME = "priority_sale_order"
+ROOT = REPO_ROOT / MODULE_NAME
 ODOO_VERSIONS = ("17.0", "18.0", "19.0", "20.0")
 ADDON_PATHS = (
     "__init__.py",
