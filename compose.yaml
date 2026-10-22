@@ -17,6 +17,12 @@ services:
 
   odoo:
     image: odoo:${ODOO_VERSION:-19.0}
+    command:
+      - --
+      - -d
+      - ${ODOO_DB:-priority_sale_order}
+      - -i
+      - ${ODOO_INIT_MODULES:-sale_management,stock,priority_sale_order}
     depends_on:
       db:
         condition: service_healthy

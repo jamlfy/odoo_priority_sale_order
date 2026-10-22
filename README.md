@@ -26,7 +26,7 @@ To use Docker instead:
 make up ENGINE=docker
 ```
 
-Open [http://localhost:8069](http://localhost:8069), create an Odoo database, enable developer mode, update the Apps list, clear the default Apps filter if needed, and install **Priority Sale Order**. The addon is mounted into the Odoo container and PostgreSQL data persists in a named volume. Choose an Odoo version with `ODOO_VERSION=17.0 make up` (also supports `18.0`, `19.0`, and `20.0`). Use `make down` to stop the stack without deleting database data; `make logs` follows the container logs.
+On the first startup, Compose creates the `priority_sale_order` database and installs Sales, Inventory, and **Priority Sale Order**. Open [http://localhost:8069](http://localhost:8069) once initialization completes. The database name and modules are configurable with `ODOO_DB` and `ODOO_INIT_MODULES` in `.env`; copy `.env.example` to `.env` to customize them. The addon is mounted into the Odoo container and PostgreSQL data persists in a named volume. Choose an Odoo version with `ODOO_VERSION=17.0 make up` (also supports `18.0`, `19.0`, and `20.0`). Use `make down` to stop the stack without deleting database data; `make logs` follows the container logs.
 
 If using Podman, install a Compose provider supported by `podman compose`.
 
