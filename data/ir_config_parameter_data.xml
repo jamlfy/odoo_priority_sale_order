@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="param_only_check_states" model="ir.config_parameter">
+        <field name="key">priority_sale_order.only_check_states</field>
+        <field name="value">sale,done</field>
+    </record>
+    <record id="param_max_times_high_priority" model="ir.config_parameter">
+        <field name="key">priority_sale_order.max_times_high_priority</field>
+        <field name="value">3</field>
+    </record>
+    <record id="param_days_offset" model="ir.config_parameter">
+        <field name="key">priority_sale_order.days_offset</field>
+        <field name="value">1.0</field>
+    </record>
+    <record id="param_allowed_group_ids" model="ir.config_parameter">
+        <field name="key">priority_sale_order.allowed_group_ids</field>
+        <field name="value" eval="str(ref('sales_team.group_sale_manager'))"/>
+    </record>
+</odoo>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_tree_inherit_higher_priority" model="ir.ui.view">
+        <field name="name">stock.picking.list.inherit.higher.priority</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list | //tree" position="attributes">
+                <attribute name="default_order">higher_priority desc, scheduled_date asc</attribute>
+            </xpath>
+            <xpath expr="//list/field[@name='origin'] | //tree/field[@name='origin']" position="after">
+                <field name="higher_priority" widget="selection_badge" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_form_inherit_higher_priority" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.higher.priority</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_ids' or @name='move_ids_without_package']/*[self::list or self::tree]/field[@name='product_id']" position="after">
+                <field name="higher_priority" widget="selection_badge" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_move_line_operation_tree_inherit_higher_priority" model="ir.ui.view">
+        <field name="name">stock.move.line.operation.list.inherit.higher.priority</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="higher_priority" widget="selection_badge" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_move_line_detailed_operation_tree_inherit_higher_priority" model="ir.ui.view">
+        <field name="name">stock.move.line.detailed.operation.list.inherit.higher.priority</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree_detailed"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="higher_priority" widget="selection_badge" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

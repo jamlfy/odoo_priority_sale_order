@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#  * priority_sale_order
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: priority_sale_order
+#: model:ir.model.fields.selection,name:priority_sale_order.selection__sale_order__higher_priority__1
+msgid "High"
+msgstr ""
+
+#. module: priority_sale_order
+#: model:ir.model.fields,field_description:priority_sale_order.field_sale_order__higher_disable_priority
+msgid "Disable priority changes"
+msgstr ""
+
+#. module: priority_sale_order
+#: model:ir.model.fields.selection,name:priority_sale_order.selection__sale_order__higher_priority__0
+msgid "Normal"
+msgstr ""
+
+#. module: priority_sale_order
+#: model:ir.model.fields,field_description:priority_sale_order.field_sale_order__higher_priority
+#: model:ir.model.fields,field_description:priority_sale_order.field_stock_move__higher_priority
+#: model:ir.model.fields,field_description:priority_sale_order.field_stock_move_line__higher_priority
+#: model:ir.model.fields,field_description:priority_sale_order.field_stock_picking__higher_priority
+msgid "Priority"
+msgstr ""
+
+#: model:ir.model.fields,field_description:priority_sale_order.field_res_config_settings__priority_sale_order_group_ids
+msgid "Groups allowed to assign high priority"
+msgstr ""
+
+#: model:ir.model.fields,field_description:priority_sale_order.field_res_config_settings__priority_sale_order_only_check_states
+msgid "States included in the limit check"
+msgstr ""
+
+#: model:ir.model.fields,field_description:priority_sale_order.field_res_config_settings__priority_sale_order_max_times_high_priority
+msgid "Maximum number of high-priority orders"
+msgstr ""
+
+#: model:ir.model.fields,field_description:priority_sale_order.field_res_config_settings__priority_sale_order_days_offset
+msgid "Period day offset"
+msgstr ""
+
+#: model:ir.model.fields,help:priority_sale_order.field_res_config_settings__priority_sale_order_only_check_states
+msgid "Select the sales order states included in the high-priority limit check."
+msgstr ""
+#: model_terms:ir.ui.view,arch_db:priority_sale_order.res_config_settings_view_form_priority_sale_order
+msgid "Priority Sale Order"
+msgstr ""
+
+#: model_terms:ir.ui.view,arch_db:priority_sale_order.res_config_settings_view_form_priority_sale_order
+msgid "High Priority Configuration"
+msgstr ""
+#: model_terms:ir.ui.view,arch_db:priority_sale_order.res_config_settings_view_form_priority_sale_order
+msgid "Authorized Groups"
+msgstr ""
+msgid "Only users in these groups can assign high priority."
+msgstr ""
+
+#: model_terms:ir.ui.view,arch_db:priority_sale_order.res_config_settings_view_form_priority_sale_order
+msgid "Select states defined on the sales order."
+msgstr ""
+
+msgid "Only users in the configured groups can set high priority."
+msgstr ""
+
+msgid "High priority cannot be assigned because the order state is not eligible or the configured limit has been reached."
+msgstr ""
+
+msgid "Selected values must be states defined on sales orders. Invalid values: %(states)s"
+msgstr ""
+
+#: model:ir.model.fields,help:priority_sale_order.field_res_config_settings__priority_sale_order_max_times_high_priority
+msgid "Maximum number of high-priority orders allowed during the configured period."
+msgstr ""
+
+#: model:ir.model.fields,help:priority_sale_order.field_res_config_settings__priority_sale_order_days_offset
+msgid "Day offset used to determine the period for counting orders."
+msgstr ""

@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#  * priority_sale_order
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "High"
+msgstr "Alta"
+
+msgid "Disable priority changes"
+msgstr "Desabilitar alterações de prioridade"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Priority"
+msgstr "Prioridade"
+
+msgid "Groups allowed to assign high priority"
+msgstr "Grupos autorizados a atribuir prioridade alta"
+
+msgid "States included in the limit check"
+msgstr "Estados incluídos na verificação do limite"
+
+msgid "Maximum number of high-priority orders"
+msgstr "Número máximo de pedidos de prioridade alta"
+
+msgid "Period day offset"
+msgstr "Deslocamento do período em dias"
+
+msgid "Select the sales order states included in the high-priority limit check."
+msgstr "Selecione os estados do pedido de venda incluídos na verificação de prioridade alta."
+
+msgid "Priority Sale Order"
+msgstr "Prioridade de pedidos de venda"
+
+msgid "High Priority Configuration"
+msgstr "Configuração de prioridade alta"
+
+msgid "Authorized Groups"
+msgstr "Grupos autorizados"
+
+msgid "Only users in these groups can assign high priority."
+msgstr "Somente usuários desses grupos podem atribuir prioridade alta."
+
+msgid "Select states defined on the sales order."
+msgstr "Selecione estados definidos no pedido de venda."
+
+msgid "Only users in the configured groups can set high priority."
+msgstr "Somente usuários dos grupos configurados podem atribuir prioridade alta."
+
+msgid "High priority cannot be assigned because the order state is not eligible or the configured limit has been reached."
+msgstr "Não é possível atribuir prioridade alta porque o estado do pedido não é elegível ou o limite configurado foi atingido."
+
+msgid "Selected values must be states defined on sales orders. Invalid values: %(states)s"
+msgstr "Os valores selecionados devem ser estados definidos nos pedidos de venda. Valores inválidos: %(states)s"
+
+msgid "Maximum number of high-priority orders allowed during the configured period."
+msgstr "Número máximo de pedidos de prioridade alta permitido durante o período configurado."
+
+msgid "Day offset used to determine the period for counting orders."
+msgstr "Deslocamento em dias usado para determinar o período de contagem."

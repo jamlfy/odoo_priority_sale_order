@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_priority_sale_order" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.priority.sale.order</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app name="priority_sale_order" string="Priority Sale Order" data-string="Priority Sale Order" data-key="priority_sale_order" groups="base.group_system">
+                    <block title="High Priority Configuration">
+                        <setting string="Authorized Groups" help="Only users in these groups can assign high priority.">
+                            <field name="priority_sale_order_group_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </setting>
+                        <setting string="States included in the limit check" help="Select states defined on the sales order.">
+                            <field name="priority_sale_order_only_check_states" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </setting>
+                        <setting string="Maximum number of high-priority orders">
+                            <field name="priority_sale_order_max_times_high_priority"/>
+                        </setting>
+                        <setting string="Period day offset">
+                            <field name="priority_sale_order_days_offset"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
