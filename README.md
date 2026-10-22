@@ -4,6 +4,8 @@ Odoo addon that adds a normal/high priority selector to sales orders, displays i
 
 Compatible with Odoo 17, 18, 19, and 20.
 
+GitHub Actions runs the Odoo test suite on all four supported versions and uploads an XML coverage report for each version as a workflow artifact.
+
 Picking and delivery lists show high-priority transfers first and sort each priority group by scheduled date.
 
 This module was created to address a common need in stores: some shipments and deliveries must be handled ahead of others, while preparation and dispatch capacity is limited. It gives sales teams a clear way to mark those orders and helps prevent high priority from being applied to more orders than the store can manage at once.

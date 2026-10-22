@@ -1,0 +1,65 @@
+name: Odoo tests and coverage
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Odoo ${{ matrix.odoo-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        odoo-version: ['17.0', '18.0', '19.0', '20.0']
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U odoo -d postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Run Odoo addon tests with coverage
+        env:
+          ODOO_VERSION: ${{ matrix.odoo-version }}
+        run: |
+          docker run --rm --network host \
+            --volume "$GITHUB_WORKSPACE:/mnt/extra-addons/priority_sale_order" \
+            --workdir /mnt/extra-addons/priority_sale_order \
+            --entrypoint bash \
+            --env ODOO_VERSION="$ODOO_VERSION" \
+            odoo:"$ODOO_VERSION" -lc '
+              set -e
+              pip3 install coverage
+              coverage run --branch --source=. /usr/bin/odoo \
+                --db_host=127.0.0.1 --db_port=5432 \
+                --db_user=odoo --db_password=odoo \
+                --database=priority_sale_order_test \
+                --init=priority_sale_order \
+                --test-enable --test-tags=/priority_sale_order \
+                --stop-after-init --without-demo=all
+              coverage report --show-missing
+              coverage xml -o coverage.xml
+            '
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-odoo-${{ matrix.odoo-version }}
+          path: coverage.xml
+          if-no-files-found: ignore
