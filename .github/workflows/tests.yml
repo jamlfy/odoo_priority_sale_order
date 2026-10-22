@@ -33,15 +33,13 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
 
-      - name: Build package for the Odoo series under test
+      - name: Stage addon for the Odoo series under test
         run: |
-          python3 tools/package_store.py \
+          python3 tools/stage_test_addon.py \
             --odoo-version '${{ matrix.odoo-version }}' \
-            --output-dir /tmp/odoo-app-package
-          mkdir -p /tmp/odoo-app/priority_sale_order /tmp/coverage-output
+            --output-dir /tmp/odoo-app
+          mkdir -p /tmp/coverage-output
           chmod 777 /tmp/coverage-output
-          unzip -q "/tmp/odoo-app-package/priority_sale_order-${{ matrix.odoo-version }}.zip" \
-            -d /tmp/odoo-app
 
       - name: Run Odoo addon tests with coverage
         env:

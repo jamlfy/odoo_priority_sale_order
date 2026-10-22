@@ -5,39 +5,17 @@ from __future__ import annotations
 
 import argparse
 import ast
-import re
-import shutil
 import tempfile
 import zipfile
 from pathlib import Path
 
+from addon_staging import MODULE_NAME, ODOO_VERSIONS, ROOT, package_version, stage_addon
 
-ROOT = Path(__file__).resolve().parents[1]
-MODULE_NAME = "priority_sale_order"
-VERSIONS = ("17.0", "18.0", "19.0", "20.0")
-PACKAGE_PATHS = (
-    "__init__.py",
-    "__manifest__.py",
-    "data",
-    "i18n",
-    "models",
-    "security",
-    "static",
-    "tests",
-    "views",
-)
-MANIFEST_VERSION = re.compile(r'("version"\s*:\s*")([^"]+)(")')
+VERSIONS = ODOO_VERSIONS
 
 
 def addon_manifest() -> dict:
     return ast.literal_eval((ROOT / "__manifest__.py").read_text(encoding="utf-8"))
-
-
-def package_version(base_version: str, odoo_version: str) -> str:
-    match = re.fullmatch(r"\d+\.\d+\.(.+)", base_version)
-    if not match:
-        raise ValueError(f"Expected an Odoo version prefix in manifest version: {base_version}")
-    return f"{odoo_version}.{match.group(1)}"
 
 
 def validate_assets(manifest: dict) -> None:
@@ -62,31 +40,9 @@ def build_packages(output_dir: Path, versions: tuple[str, ...] = VERSIONS) -> li
 
     for odoo_version in versions:
         target_version = package_version(base_version, odoo_version)
-        rewritten_manifest, count = MANIFEST_VERSION.subn(
-            lambda match: f"{match.group(1)}{target_version}{match.group(3)}",
-            manifest_text,
-            count=1,
-        )
-        if count != 1:
-            raise ValueError("Could not update the version in __manifest__.py")
-
         package = output_dir / f"{MODULE_NAME}-{odoo_version}.zip"
         with tempfile.TemporaryDirectory(prefix=f"{MODULE_NAME}-") as temporary:
-            stage = Path(temporary) / MODULE_NAME
-            stage.mkdir()
-            for relative in PACKAGE_PATHS:
-                source = ROOT / relative
-                destination = stage / relative
-                if source.is_dir():
-                    shutil.copytree(
-                        source,
-                        destination,
-                        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store"),
-                    )
-                elif source.is_file():
-                    destination.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.copy2(source, destination)
-            (stage / "__manifest__.py").write_text(rewritten_manifest, encoding="utf-8")
+            stage = stage_addon(odoo_version, Path(temporary) / MODULE_NAME)
 
             with zipfile.ZipFile(package, "w", compression=zipfile.ZIP_DEFLATED) as archive:
                 for path in sorted(stage.rglob("*")):
