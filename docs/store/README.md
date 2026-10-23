@@ -1,10 +1,10 @@
 # Store documentation builder
 
-The Markdown files in this directory are the editable source for the store listings. `build_html.py` converts them to standalone HTML pages with a responsive layout inspired by Odoo's purple palette, typography, and card-based interface.
+The Markdown files in this directory are the editable source for the store listings. `build_html.py` converts them to standalone HTML pages with a responsive layout inspired by Odoo's purple palette, typography, and card-based interface. The page markup lives in `templates/page.html`, the styles in `static/styles.css`, and the translations in `build_html.py`.
 
 ## Requirements
 
-Install the Python Markdown dependency:
+Install the Python dependencies:
 
 ```bash
 python3 -m pip install -r docs/store/requirements.txt

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ language.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{{ language.title }}</title>
+  <style>
+{{ styles | safe }}</style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">O</span><span>{{ site_name }}</span></a>
+    <nav class="languages" aria-label="Language">
+      {% for code, entry in languages.items() %}
+      <a href="{{ entry.output }}"{% if code == language_code %} aria-current="page"{% endif %}>{{ entry.label }}</a>
+      {% endfor %}
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">{{ language.eyebrow }}</p>
+      <h1>{{ language.title }}</h1>
+      <div class="hero-rule"></div>
+    </div>
+  </section>
+  <main class="layout">
+    <article class="article">{{ body | safe }}</article>
+    <aside class="sidebar">
+      <section class="side-card"><p class="side-label">{{ language.sidebar_label }}</p><p class="accent">17 · 18 · 19 · 20</p><p>{{ language.sidebar_copy }}</p></section>
+      {% if not store_listing %}
+      <section class="side-card"><p class="side-label">{{ language.source_label }}</p><p><a href="../{{ language.file }}">{{ language.source_link }}</a></p></section>
+      {% endif %}
+    </aside>
+  </main>
+  <footer>{{ language.footer }}</footer>
+</body>
+</html>
